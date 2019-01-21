@@ -15,10 +15,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    @IBAction func showMessagePressed(_ sender: UIButton) {
-          messageLabel.text = "You Are Awesome!"
-        }
+    
+    @IBAction func showMessagePressed1(_ sender: UIButton) {
+        messageLabel.text = "You are Awesome!"
+        messageLabel.textColor = UIColor.red
+    }
+    
+    @IBAction func showMessagePressed2(_ sender: UIButton) {
+        messageLabel.text = "You are Great!"
+        messageLabel.textColor = UIColor.blue
+    }
     
 }
 
