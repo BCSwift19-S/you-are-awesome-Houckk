@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var awesomeImageView: UIImageView!
+    var awesomePlayer = AVAudioPlayer()
     var index = -1
     var imageIndex = -1
+    var soundIndex = -1
     let numberOfImages = 10
+    let numberOfSounds = 6
 
     //Code below executes when the app's view first loads
     override func viewDidLoad() {
@@ -28,6 +32,7 @@ class ViewController: UIViewController {
         //var newIndex = -1
         var newIndex: Int //declares but doesnt initialize newIndex
         
+        //show a message
         repeat {
             newIndex = Int.random (in: 0..<messages.count)
         } while (index == newIndex)
@@ -35,12 +40,50 @@ class ViewController: UIViewController {
         index = newIndex
         messageLabel.text = messages[index]
         
+        
+        
+        
+        //show an image
         repeat{
             newIndex = Int.random(in: 0..<numberOfImages)
         } while (imageIndex == newIndex)
         
         imageIndex = newIndex
         awesomeImageView.image = UIImage(named: "image\(imageIndex)")
+        
+        
+        
+        
+        
+        
+        //Get a random num to use in our soundName file
+        
+        repeat{
+            newIndex = Int.random(in: 0..<numberOfSounds)
+        } while (imageIndex == newIndex)
+        
+        soundIndex = newIndex
+        
+        
+        
+        
+        //play a sound
+        
+        var soundName = "sound\(soundIndex)"
+        
+        //Can we load in the file soundName
+        if let sound = NSDataAsset(name: soundName)
+        {
+         do{
+            try awesomePlayer = AVAudioPlayer(data: sound.data)
+                awesomePlayer.play()
+            } catch {
+                print ("ERROR: data in \(soundName) coundlnt be played as a sound")
+            }
+        } else {
+                //if reading in the NSDataAssest didnt work, tell the developer/report error
+            print ("ERROR: file\(soundName) didn't load")
+        }
     }
 }
         
