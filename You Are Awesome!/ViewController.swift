@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         return newIndex
     }
     
-    func playSound(soundName: String) {
+    func playSound(soundName: String, audioPlayer: inout AVAudioPlayer) {
         //play a sound
     
         
@@ -41,8 +41,8 @@ class ViewController: UIViewController {
         if let sound = NSDataAsset(name: soundName)
         {
             do{
-                try awesomePlayer = AVAudioPlayer(data: sound.data)
-                awesomePlayer.play()
+                try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play()
             } catch {
                 print ("ERROR: data in \(soundName) coundlnt be played as a sound")
             }
@@ -82,8 +82,8 @@ class ViewController: UIViewController {
     
         
         //Play a sound
-        var soundName = "sound\(soundIndex)"
-        playSound(soundName: soundName)
+        let soundName = "sound\(soundIndex)"
+        playSound(soundName: soundName, audioPlayer: &awesomePlayer )
         
         
       
